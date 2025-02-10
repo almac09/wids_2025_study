@@ -78,3 +78,19 @@ This will show you the remote repository URLs you're pushing to.
 git fetch upstream 
 git merge upstream/main  # or the correct branch
 ```
+
+## 9. how to force a push to work
+
+```bash
+# Configure Git to use the system CA certificates
+# git config --global http.sslCAInfo "C:\Program Files\Git\mingw64\ssl\certs\ca-bundle.crt"
+# git config --global http.sslCAInfo "C:\Users\alan.mcdonagh\AppData\Local\Programs\Git\mingw64\ssl\certs\ca-bundle.crt"
+
+git config --global http.sslCAInfo "$env:LOCALAPPDATA\Programs\Git\mingw64\ssl\certs\ca-bundle.crt"
+
+# As a last resort, disable SSL verification (not recommended)
+git config --global http.sslVerify false
+
+# Push your changes to the upstream repository
+git push -u upstream main
+```
