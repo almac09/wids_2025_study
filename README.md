@@ -11,8 +11,14 @@ First you will need to join the datathon using the following link:
 
 # Step 3 download all of the input data from Kaggle.
 
-* [WiDS Datathon 2025 (kaggle.com): Input Data](https://storage.googleapis.com/kaggle-competitions-data/kaggle-v2/90566/10712530/bundle/archive.zip?GoogleAccessId=web-data@kaggle-161607.iam.gserviceaccount.com&Expires=1739529137&Signature=Bhj0du7mFPo9TAp%2BcdPObZo6jv47fuOFcIJPwP6kOcFuxrRnhhpm53lAqcTlOjEOqct%2FquxaBqQwlZaUg3KgS7KzjkUad%2F88LXCn9pZn9cGszmVj9fGriWM8XAEeZsFejOiIjfoIolf%2FtiGQwNmGNYpIae0TMA7YDmVX8Ix1f5qrex%2B%2BqGXCNo%2FsLOIGMbo7wE4IoOXnn%2Fy1TcLj8s3DHXCGffFYnPHtOQR6HAfLo4kjfpN%2FMUeikCiuLnpsGL9YmjtDEYJAaGJhoNRDPhMBWULzMgVKKWRgU4lglxeXONojNH1RIrrLBOH9CN26Wp3zj7bLUqPipsSlfMAL%2F2tRvw%3D%3D&response-content-disposition=attachment%3B+filename%3Dwidsdatathon2025.zip)
-* Then extract that zip file to your downloads folder.
+* [WiDS Datathon 2025 (kaggle.com): Input Data](https://www.kaggle.com/competitions/widsdatathon2025/data)
+* Then extract that zip file to the `data` folder in the root of this repository.
+
+```bash
+kaggle competitions download -c widsdatathon2025 -p data
+Expand-Archive -Path data\\widsdatathon2025.zip -DestinationPath data 
+```
+
 
 # Step 4 follow the first 3 tutorials posted on YouTube:
 

@@ -2,19 +2,231 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Increase HTTP Buffer Size",
-            "type": "shell",
-            "command": "git config --global http.postBuffer 524288000; Start-Sleep -Seconds 5; Exit",
+            "label": "01. UV Create Virtual Environment",
+            "type": "process",
+            "command": "${env:USERPROFILE}\\.local\\bin\\uv.exe",
+            "args": ["venv", ".venv"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
             "problemMatcher": [],
-            "runOptions": {
-                "runOn": "folderOpen"
+            "presentation": {
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared",
+                "clear": false
+            }
+        },
+        {
+            "label": "02. Activate Virtual Environment",
+            "type": "process",
+            "command": "powershell.exe",
+            "args": ["-ExecutionPolicy", "Bypass", "-Command", ".\\.venv\\Scripts\\Activate.ps1"],
+            "windows": {
+                "command": "powershell.exe",
+                "args": ["-ExecutionPolicy", "Bypass", "-Command", ".\\.venv\\Scripts\\Activate.ps1"]
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "focus": true,
+                "panel": "dedicated",
+                "clear": false,
+                "close": false
+            },
+            "isBackground": false
+        },
+        {
+            "label": "03. UV Install Dependencies",
+            "type": "process",
+            "command": "${env:USERPROFILE}\\.local\\bin\\uv.exe",
+            "args": ["pip", "install", "-r", "pyproject.toml"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+            "dependsOn": [
+                "Update pip"
+            ]
+        },
+        {
+            "label": "04. UV cache clean",
+            "type": "process",
+            "command": "${env:USERPROFILE}\\.local\\bin\\uv.exe",
+            "args": ["cache", "clean"],
+            "dependsOn": [
+                "02. Activate Virtual Environment"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared",
+                "clear": false
+            }
+        },
+        {
+            "label": "05. UV sync",
+            "type": "process",
+            "command": "${env:USERPROFILE}\\.local\\bin\\uv.exe",
+            "args": ["sync"],
+            "dependsOn": [
+                "02. Activate Virtual Environment"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared",
+                "clear": false
+            }
+        },
+        {
+            "label": "06. Delete Virtual Environment",
+            "type": "process",
+            "command": "powershell.exe",
+            "args": ["-ExecutionPolicy", "Bypass", "-Command", "Remove-Item -Recurse -Force .\\.venv"],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared",
+                "clear": false
+            }
+        },
+        {
+            "label": "07. UV pip list",
+            "type": "process",
+            "command": "${env:USERPROFILE}\\.local\\bin\\uv.exe",
+            "args": ["pip", "list"],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared",
+                "clear": false
+            }
+        },
+        {
+            "label": "08. Kaggle Download Data",
+            "type": "process",
+            "command": "${workspaceFolder}\\.venv\\Scripts\\kaggle.exe",
+            "args": ["competitions", "download", "-c", "widsdatathon2025", "-p", "data"],
+            "dependsOn": [
+                "02. Activate Virtual Environment"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared",
+                "clear": false
+            }
+        },
+        {
+            "label": "09. Kaggle Extract Data",
+            "type": "shell",
+            "command": "Expand-Archive",
+            "args": [
+                "-Path",
+                "data\\widsdatathon2025.zip",
+                "-DestinationPath", 
+                "data",
+            ],
+            "dependsOn": [
+                "02. Activate Virtual Environment"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared",
+                "clear": false
             },
             "options": {
                 "shell": {
-                    "executable": "powershell",
-                    "args": ["-NoExit", "-Command"]
+                    "executable": "powershell.exe",
+                    "args": ["-Command"]
+                }
+            }
+        },
+
+        {
+            "label": "10. CMD Echo Hello World",
+            "type": "shell",
+            "command": "echo",
+            "args": ["Hello, World!"],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared",
+                "clear": false
+            },
+            "options": {
+                "shell": {
+                    "executable": "cmd.exe",
+                    "args": ["/c"]
+                }
+            }
+        },
+        {
+            "label": "11. PS Echo Hello World",
+            "type": "shell",
+            "command": "echo",
+            "args": ["Hello, World!"],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared",
+                "clear": false
+            },
+            "options": {
+                "shell": {
+                    "executable": "powershell.exe",
+                    "args": ["-Command"]
                 }
             }
         }
+        
     ]
 }

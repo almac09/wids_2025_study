@@ -1,0 +1,11 @@
+/**
+ * This script is used to keep the specified directory in the Git repository.
+ * 
+ * The purpose of a `.gitkeep` file is to ensure that an otherwise empty directory
+ * is tracked by Git. In this case, the directory is intended for saving input files
+ * that are too large to be committed directly to the repository. These input files
+ * can be populated using the Kaggle tasks defined in the `.vscode/tasks.json` file.
+ * 
+ * By including a `.gitkeep` file, we ensure that the directory structure is maintained
+ * in the repository, even if the directory itself is empty.
+ */

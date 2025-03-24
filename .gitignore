@@ -175,3 +175,9 @@ cython_debug/
 
 # KNIME-Workspace
 notebooks/knime-workspace/*
+
+.fake
+
+# Keep data folder but ignore its contents
+data/*
+!data/.gitkeep
