@@ -19,4 +19,11 @@ dependencies = [
     "pandas",
     "numpy<2.0.0",
     "kaggle",
+    "scikit-learn",
+    "lightgbm",
+    "xgboost",
+    "catboost",
+    "umap-learn",
+    "numpy",
+    "seaborn",
 ]
