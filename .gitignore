@@ -170,9 +170,6 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-# VS Code worskpace file
-*.code-workspace
-
 # KNIME-Workspace
 notebooks/knime-workspace/*
 
