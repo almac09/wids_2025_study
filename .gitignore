@@ -181,3 +181,5 @@ notebooks/knime-workspace/*
 # Keep data folder but ignore its contents
 data/*
 !data/.gitkeep
+
+*.html
